@@ -1,4 +1,4 @@
 {
-  "_base": "https://raw.githubusercontent.com/alexanderreiprich/ampc/main/",
-  "palkia": "samples/misc/palkia.wav",
+  '_base': 'https://raw.githubusercontent.com/alexanderreiprich/ampc/main/',
+  'palkia': 'samples/misc/palkia.wav',
 }
