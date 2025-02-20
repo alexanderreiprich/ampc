@@ -1,0 +1,36 @@
+cps(160/4)
+
+samples({
+palkia: 'samples/misc/palkia.wav',
+}, 'https://raw.githubusercontent.com/alexanderreiprich/ampc/main/');
+
+
+palkia: s("<palkia>").begin(0.5).velocity(0.1).slow(2)
+
+drums:
+  s(`
+   [bd - - -] [- - - -] [bd - - -] [bd - - -] [bd bd bd bd] [bd - - -] [bd bd bd bd] [bd - - -],
+   [hh - hh -] [hh - hh hh] [hh - hh -] [hh - hh -] [hh - hh -] [hh - hh -] [hh - hh -] [hh - hh -],
+   [clap - - -] [- - - -] [clap - - -] [- - - -] [clap - - -] [clap - clap -] [clap - - -] [clap - clap -]
+   [- - - -] [- - - -] [- - - -] [- - - -] [- - - -] [- - - -] [- - - -] [- - - -]
+  `)
+    .slow(2)
+    .gain(0.2)
+
+synth:
+  note(`
+    [d2 ~ ~ ~]  
+    [~ ~ d2 ~] 
+    [d2 ~ ~ ~] 
+    [d2 ~ ~ ~]
+    [- - - -]
+    [d2 ~ ~ ~]
+    [g2 ~ ~ ~]
+    [c2 ~ ~ ~]
+  `)
+  .s(`synth`)
+  .slow(2)
+  .gain(2)
+  .delay(0.03)
+  .room(0.2)
+  .lpf(150)
