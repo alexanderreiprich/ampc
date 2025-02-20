@@ -1,0 +1,32 @@
+cps(160/4)
+
+samples('shabda/speech/fr-FR/m:holymoly')
+
+voice: s("holymoly").slow(4).room(0.2).delay(0.3)
+
+drums:
+  s(`
+   [bd - - -] [- - - -] [bd - - -] [bd - - -] [bd bd bd bd] [bd - - -] [bd bd bd bd] [bd - - -],
+   [hh - hh -] [hh - hh hh] [hh - hh -] [hh - hh -] [hh - hh -] [hh - hh -] [hh - hh -] [hh - hh -],
+   [clap - - -] [- - - -] [clap - - -] [- - - -] [clap - - -] [clap - clap -] [clap - - -] [clap - clap -]
+  `)
+    .slow(2)
+    .gain(0.2)
+
+synth:
+  note(`
+    [d2 ~ ~ ~]  
+    [~ ~ d2 ~] 
+    [d2 ~ ~ ~] 
+    [d2 ~ ~ ~]
+    [- - - -]
+    [d2 ~ ~ ~]
+    [g2 ~ ~ ~]
+    [c2 ~ ~ ~]
+  `)
+  .s(`synth`)
+  .slow(2)
+  .gain(2)
+  .delay(0.03)
+  .room(0.2)
+  .lpf(150)
