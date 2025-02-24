@@ -1,0 +1,105 @@
+setcps(165/120)
+
+samples(
+  {
+    palkia: 'samples/misc/palkia.wav',
+    synth: 'samples/synth/synth.wav',
+    voice1: 'samples/voice/looperman-l-2687909-0346570-90s-voices.wav',
+    voice2: 'samples/voice/looperman-l-3155317-0309659-savme.wav'
+  }, 
+  'https://raw.githubusercontent.com/alexanderreiprich/ampc/main/'
+);
+
+hh: 
+  s(`
+   [hh hh hh hh] [hh hh hh hh] [hh hh hh hh] [hh hh hh hh] [hh hh hh hh] [hh hh [hh hh hh hh] hh] [hh [hh hh hh hh] hh hh] [hh - hh -],
+   [- - - -] [- - - -] [- - - -] [- - - -] [- - - -] [- - - -] [- - - -] [- - - -]
+  `)
+    .bank("ace")
+    .slow(4)
+    .gain(0.2)
+
+sd:
+  s(`
+   [- - - -] [sd - - -] [- - - -] [sd - - -] [- - - -] [sd - [sd sd] -] [- sd [sd sd sd sd] -] [sd - sd -],
+   [- - - -] [- - - -] [- - - -] [- - - -] [- - - -] [- - - -] [- - - -] [- - - -]
+  `)
+    .bank("ace")
+    .slow(4)
+    .gain(0.1)
+
+
+bd2:
+  s(`
+   [bd - - -] [bd - - -] [bd - - -] [bd - - -] [- - - -] [- - - -] [- - - -] [- - - -],
+   [- - - -] [- - - -] [- - - -] [- - - -] [- - - -] [- - - -] [- - - -] [- - - -]
+  `)
+    .bank("bossdr220")
+    .slow(4)
+    .gain(0.4)
+    .delay(0.1)
+    .room(0.1)
+
+
+voice1:
+  s("<voice2>")
+    .gain(4)
+    .cut(2)
+    .slow(2)
+    .speed(2)
+    .lpf(400)
+    .begin(0.225)
+    .delay(0)
+    .rarely(x=>x)
+    .color("white")
+    ._punchcard()
+
+synth:
+  note(`
+    [d2 ~ ~ ~]  
+    [~ ~ c2 ~] 
+    [d2 ~ ~ ~] 
+    [d3 ~ ~ ~]
+    [- - - -]
+    [c2 ~ c2 ~]
+    [g2 ~ ~ ~]
+    [c2 ~ ~ ~]
+  `)
+  .s(`synth`)
+  .slow(2)
+  .gain(1.5)
+  .delay(0.20)
+  .lpf(150)
+
+palkia: s("<palkia>").begin(0.5).velocity(0.2).slow(4)
+
+gun: s("<gm_gunshot>").gain(0).sometimesBy(.2, x=>x.gain(2))
+
+// meow: note(`
+//       [- - - -]
+//       [- - - -]
+//       [- - - -]
+//       [- - - -]
+//       [- - - -]
+//       [c2 - c2 -]
+//       [c2 - - -]
+//       [- - - -]
+//     `)
+//   .s("<meow>")
+//   .slow(4)
+//   .gain(3)
+
+square:
+  note(`
+    [c3 - - -]
+    [c2 - <c3 c4> -]
+    [c3 - - -]
+    [c3 - - -]
+    `)
+  .s("square")
+  .gain(0.2)
+  .crush("5")
+  
+
+noise:
+  s("pink").gain(0.25)

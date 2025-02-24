@@ -1,4 +1,4 @@
-setcps(140/120)
+setcps(120/120)
 
 samples(
   {
@@ -11,12 +11,12 @@ samples(
 
 drums:
   s(`
-   [bd - - -] [- - - -] [bd - - -] [bd - - -] [bd bd bd bd] [bd - - -] [bd bd bd bd] [bd - - -],
-   [hh - hh -] [hh - hh hh] [hh - hh -] [hh - hh -] [hh - hh -] [hh - hh -] [hh - hh -] [hh - hh -],
+   [bd - - -] [- - - -] [bd - - -] [bd - - -] [bd bd bd bd] [bd - bd -] [bd bd bd bd] [bd - bd -],
+   [hh - hh -] [hh - hh hh] [hh - hh -] [hh - hh -] [hh - hh -] [hh - hh -] [hh - hh hh] [hh - hh -],
    [clap - - -] [- - - -] [clap - - -] [- - - -] [clap - - -] [clap - clap -] [clap - - -] [clap - clap -],
    [- - - -] [- - - -] [- - - -] [- - - -] [- - - -] [- - - -] [- - - -] [- - - -]
   `)
-    .slow(4)
+    .slow(8)
     .gain(0.2)
 
 synth:
@@ -26,7 +26,7 @@ synth:
     [d2 ~ ~ ~] 
     [d3 ~ ~ ~]
     [- - - -]
-    [c2 ~ ~ ~]
+    [c2 ~ c2 ~]
     [g2 ~ ~ ~]
     [c2 ~ ~ ~]
   `)
@@ -37,4 +37,15 @@ synth:
   .room(0.2)
   .lpf(150)
 
-palkia: s("<palkia>").begin(0.5).velocity(0.1).slow(4)
+palkia: s("<palkia>").begin(0.5).gain(0.1).slow(4)
+
+square:
+  note(`
+    [c3 - - -]
+    [c2 - <c3 c4> -]
+    [c3 - - -]
+    [c3 - - -]
+    `)
+  .s("square")
+  .lpf(700)
+  .gain(0.4)
