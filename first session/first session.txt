@@ -1,0 +1,44 @@
+
+samples('github:tidalcycles/dirt-samples')
+
+// s("lighter:1").gain(1).struct("1 0 1 0 1 0 1 0 1 1 1 0 1 0 1 1")
+// s("lighter:1").gain(1).struct("1 ~ [1 1 1] ~ 1 1 1 1")
+
+const beat = stack(
+  s("hh27").gain(0.5).struct("[1 1 1 1]*4"),
+  s("clap").gain(1).struct("[0 0 1 0]*1"),
+  s("cp").gain(1).struct("[0 0 0 [~ 1]]").mask("<0 0 0 1>"),
+);
+
+
+const base = stack(
+  s("bd").gain(0.5).struct("1 1 ~ [1 1 1]"), // rausnehmen während des nicht-chorus 
+  n("0 0 1").scale("C#:major").s("bass1").clip(1).gain(0.7).room(0.5)
+).mask("<0 1>");
+
+
+const melodie = stack(
+"{12 1 3 10 4 5 7 6}%4".struct("1(<3, 5, 4>,8)").sometimes(x=>x.rev()).scale('c#4:major').note().sound("piano").hpf(1000).room(0.5).fast(1).gain(0.7),
+);
+
+
+const melodie2 = stack(
+  "<2 [3 7] 6 5 4 5 2 [5 4]>".scale('c#2:major').note().sound("piano").room(0.5).fast(1).gain(0.7),
+);
+
+
+const chords = stack(
+  "<0 2 5 7>".scale('c#2:major').note().sound("piano"),
+
+)
+
+
+stack(
+  //melodie,
+ // melodie2,
+  chords,
+  beat,
+  //base,
+).cpm(140/4)
+
+// "<0 2 5 7>".scale('c#2:major').note().sound("gm_electric_guitar_clean").cutoff(2000).attack(1).release(1).sustain(0).delay(0)
