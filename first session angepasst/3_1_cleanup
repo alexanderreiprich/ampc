@@ -26,15 +26,14 @@ const base = stack(
   .bank("bossdr220")
   .gain(0.3)
   .struct("1 1 ~ [1 1 1]")
-  .mask("<0 0 1 0>"), // rausnehmen während des nicht-chorus 
+  .mask("<0 0 1 0>"),
   
   n("0 0 0 0 0 0 <2 -2> 0")
   .scale("C#:major")
   .s("supersaw")
   .gain(0.3)
   .room(0.8)
-  .crush(5)
-  .slow(1)
+  .crush(6)
 );
 
 
@@ -110,7 +109,7 @@ const pepsi = stack(
 );
 
 
-const pepsi_adlip = stack(
+const pepsi_adlib = stack(
   s("<new_pepsi>")
   .begin("0")
   .room(1.7)
@@ -150,16 +149,17 @@ const effects = stack(
 
 
 stack(
- //chords,
-  chords2,
-  melodie3,
-  //pepsi,
-  speech,
+ // chords,
+ //  chords2,
+ //  melodie2,
+  // melodie4,
+  // pepsi,
+  // speech,
   //pepsi_adlip,
   //to_me_loop,
-  drums,
+  // drums,
   base,
-  effects,
+  // effects,
 ).cpm(150/4)
 
 
