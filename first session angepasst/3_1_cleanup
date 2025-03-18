@@ -3,6 +3,7 @@ samples('github:tidalcycles/dirt-samples')
 samples(
   {
     palkia: 'samples/misc/palkia.wav',
+    can_open: 'samples/misc/can_opening.mp3',
     synth: 'samples/synth/synth.wav',
     voice1: 'samples/voice/looperman-l-2687909-0346570-90s-voices.wav',
     voice2: 'samples/voice/looperman-l-3155317-0309659-savme.wav',
@@ -26,15 +27,14 @@ const base = stack(
   .bank("bossdr220")
   .gain(0.3)
   .struct("1 1 ~ [1 1 1]")
-  .mask("<0 0 1 0>"), // rausnehmen während des nicht-chorus 
+  .mask("<0 0 1 0>"),
   
   n("0 0 0 0 0 0 <2 -2> 0")
   .scale("C#:major")
   .s("supersaw")
   .gain(0.3)
   .room(0.8)
-  .crush(5)
-  .slow(1)
+  .crush(6)
 );
 
 
@@ -110,7 +110,7 @@ const pepsi = stack(
 );
 
 
-const pepsi_adlip = stack(
+const pepsi_adlib = stack(
   s("<new_pepsi>")
   .begin("0")
   .room(1.7)
@@ -146,19 +146,21 @@ const speech = stack(
 const effects = stack(
   s("<gm_gunshot>").gain(0).sometimesBy(.2, x=>x.gain(2)),
   s("<palkia>").begin(0.5).velocity(0.2).slow(4),
+  s("<can_open>") // rausnehmen nach 1 mal
 );
 
 
 stack(
- //chords,
-  chords2,
-  melodie3,
-  //pepsi,
-  speech,
+ // chords,
+ //  chords2,
+ //  melodie2,
+  // melodie4,
+  // pepsi,
+  // speech,
   //pepsi_adlip,
   //to_me_loop,
-  drums,
-  base,
+  // drums,
+  // base,
   effects,
 ).cpm(150/4)
 
