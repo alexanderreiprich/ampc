@@ -160,8 +160,13 @@ stack(
   //pepsi_adlip,
   //to_me_loop,
   // drums,
+<<<<<<< HEAD
   // base,
   effects,
+=======
+  base,
+  // effects,
+>>>>>>> 085890e7d1b2a34050e44d8186164bc77124daa7
 ).cpm(150/4)
 
 
