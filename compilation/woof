@@ -1,0 +1,55 @@
+
+samples('github:tidalcycles/dirt-samples')
+samples({
+  bassdrum: 'machines/YamahaTG33/yamahatg33-bd/Bassdrum-01.wav'
+}, 'https://raw.githubusercontent.com/ritchse/tidal-drum-machines/main/')
+samples(
+  {
+    palkia: 'samples/misc/palkia.wav',
+    can_open: 'samples/misc/can_opening.mp3',
+    synth: 'samples/synth/synth.wav',
+    voice1: 'samples/voice/looperman-l-2687909-0346570-90s-voices.wav',
+    voice2: 'samples/voice/looperman-l-3155317-0309659-savme.wav',
+    bell1: 'samples/synth/synth-bell_C_minor.wav',
+    pepsi: 'samples/pepsi/not_what_it_used_to_be_long.wav',
+    speech: 'samples/pepsi/pepsispeech_01.wav',
+    new_pepsi: 'samples/pepsi/processed/not_what_it_used_to_be_long.wav',
+    sugar_be: 'samples/pepsi/processed/pepsispeech_03.wav',
+  }, 
+  'https://raw.githubusercontent.com/alexanderreiprich/ampc/main/'
+);
+
+const drums = stack(
+  // s("hh27").gain(0.5).struct("[1 1 1 1]*4"),
+  // s("clap").gain(1).struct("[0 0 1 0]*1"),
+  // s("cp").gain(1).struct("[0 0 0 [~ 1]]").mask("<0 0 0 1>"),
+  // s("bd").gain(1).struct("[1 0 1 0] [0 0 0 [1 1 1]]").mask("<0 1>")
+);
+
+const metronome = stack(
+  s("clap").gain(1).struct("[1 1]")
+);
+
+const base = stack(
+  s("bassdrum")
+  .gain(0.25)
+  .struct("1 1 ~ [1 1 1]")
+  .mask("<0 0 1 0>")
+  .hpf(300)
+  ,
+  
+  n("0 0 0 0 0 0 <2 -2> 0")
+  .scale("C#:major")
+  .s("sawtooth")
+  .gain(0.3)
+  .room(0.8)
+);
+
+stack(
+  // base,
+  drums,
+  // metronome
+).cpm(150/4);
+
+
+
