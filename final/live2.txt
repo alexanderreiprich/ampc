@@ -1,0 +1,128 @@
+
+samples('github:tidalcycles/dirt-samples')
+samples(
+  {
+    palkia: 'samples/misc/palkia.wav',
+    can_open: 'samples/misc/can_opening.mp3',
+    synth: 'samples/synth/synth.wav',
+    voice1: 'samples/voice/looperman-l-2687909-0346570-90s-voices.wav',
+    voice2: 'samples/voice/looperman-l-3155317-0309659-savme.wav',
+    bell1: 'samples/synth/synth-bell_C_minor.wav',
+    pepsi: 'samples/pepsi/not_what_it_used_to_be_long.wav',
+    speech: 'samples/pepsi/pepsispeech_01.wav',
+    new_pepsi: 'samples/pepsi/processed/not_what_it_used_to_be_long.wav',
+    sugar1: 'samples/pepsi/processed/01-01.wav',
+    sugar2: 'samples/pepsi/processed/where_sugar_3.wav'
+  }, 
+  'https://raw.githubusercontent.com/alexanderreiprich/ampc/main/'
+);
+samples('https://strudel.cc/EmuSP12.json');
+
+const can_sound = "<can_open>"
+const can_mask = "<1 0 0 0 0 0 0>"
+
+const effect = sound(can_sound).mask(can_mask)
+
+const melodie_scale='c#4:major';
+const melodie_notes = "{9 8 7 6 5 4}%4";
+const melodie_struct="1(<2, 4>,8)";
+const melodie_sound="gm_pad_bowed";
+//MELODIE
+
+const melodie = stack(
+  melodie_notes.struct(melodie_struct)
+  .sometimes(x=>x.rev())
+  .scale(melodie_scale)
+  .note()
+  .sound(melodie_sound)
+  .hpf(5000)
+  .room(1)
+  .gain(2)
+)
+
+
+
+const chords_notes = "<0 2 5 7>";
+const chords_sound = "triangle";
+const chords_scale = "c#3:major";
+//CHORDS
+
+const chords = stack(
+  chords_notes.scale(chords_scale)
+  .note()
+  .s(chords_sound)
+)
+
+
+
+
+const to_me_loop_lpf = "<500 700 900 1000 2000 1000 900 700 500>";
+const to_me_loop_sound = "<new_pepsi>";
+//TO ME LOOP
+
+const to_me_loop = stack(
+  s(to_me_loop_sound)
+  .begin(.75)
+  .clip(1)
+  .room(1.7)
+  .gain(2)
+  .lpf(to_me_loop_lpf)
+)
+
+
+
+const sugar1_sound= "<sugar1>";
+//SUGAR1
+
+const sugar1= stack(
+  s(sugar1_sound)
+  .begin(0.2)
+  .gain(1.5)
+  .room(1.7)
+  .cut(2)
+  .lpf(1000)
+)
+
+
+const sugar2_sound= "<sugar2>";
+//SUGAR3
+
+const sugar2 = stack(
+  s(sugar2_sound)
+  .begin(0.3)
+  .gain(1.5)
+  .room(1.7)
+  .cut(7)
+  .lpf(1000)
+)
+
+const pepsi_sound = "<new_pepsi>";
+const pepsi_begin = "<0 ~ .5 .75>";
+const pepsi_clip = "<.3 ~ .75  1>";
+//PEPSI
+
+const pepsi = stack(
+   s(pepsi_sound)
+  .begin(pepsi_begin)
+  .gain(1.5)
+  .room(1.7)
+  .clip(pepsi_clip)
+  .lpf(4000)
+);
+
+
+
+stack(
+  // effect,
+ //  melodie,
+ //  chords,
+ //  sugar1,
+ //  sugar2,
+ // pepsi,
+ //to_me_loop
+).cpm(150/4)
+  
+  //.delay(.25).gain(5).delayfeedback(".5")
+
+
+

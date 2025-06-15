@@ -1,0 +1,115 @@
+
+samples('github:tidalcycles/dirt-samples')
+samples(
+  {
+    palkia: 'samples/misc/palkia.wav',
+    can_open: 'samples/misc/can_opening.mp3',
+    synth: 'samples/synth/synth.wav',
+    voice1: 'samples/voice/looperman-l-2687909-0346570-90s-voices.wav',
+    voice2: 'samples/voice/looperman-l-3155317-0309659-savme.wav',
+    bell1: 'samples/synth/synth-bell_C_minor.wav',
+    pepsi: 'samples/pepsi/not_what_it_used_to_be_long.wav',
+    speech: 'samples/pepsi/pepsispeech_01.wav',
+    new_pepsi: 'samples/pepsi/processed/not_what_it_used_to_be_long.wav',
+    sugar1: 'samples/pepsi/processed/01-01.wav',
+    sugar3: 'samples/pepsi/processed/where_sugar_3.wav'
+  }, 
+  'https://raw.githubusercontent.com/alexanderreiprich/ampc/main/'
+);
+samples('https://strudel.cc/EmuSP12.json');
+
+
+// Chords2
+
+const chords2_notes = `<[0,4,7] [0,4,7] [0,4,7] [0,4,7]>`.add(`<c# e# a# c#>`);
+const chords2_compressor = "-10:10:10:.002:.02";
+const chords2_sound = "gm_synth_strings_1";
+
+const chords2 = stack(
+  note(chords2_notes)
+  .sound(chords2_sound)
+  .hpf(2000)
+  .gain(0.75)
+  .room(1)
+  .compressor(chords2_compressor)
+);
+
+
+// Drums
+
+const hh_struct = "[1 1 1 1]*4";
+const clap_struct = "[0 0 1 0]*1";
+const cp_struct = "[0 0 0 [~ 1]]";
+const cp_mask = "<0 0 0 1>";
+const bd_struct = "[1 0 1 0] [0 0 0 [1 1 1]]";
+const bd_struct_2 = "[1 1 1 1]*2"; // auf zwei erhöhen
+
+const drums = stack(
+  s("hh27").gain(0.5).struct(hh_struct),
+  s("clap").struct(clap_struct),
+  s("cp").struct(cp_struct).mask(cp_mask),
+  // s("bd").struct(bd_struct).mask("<0 1>"),
+  s("bd").struct(bd_struct_2),
+);
+
+
+// Base
+
+const bassdrum_struct = "1 1 ~ [1 1 1]";
+const bassdrum_mask = "<0 0 1 0>";
+const saw_notes = "0 0 0 0 0 0 <2 -2> 0";
+const saw_scale = "C#:major";
+
+
+const base = stack(
+  s("bassdrum")
+  .gain(0.25)
+  .struct(bassdrum_struct)
+  .mask(bassdrum_mask)
+  .hpf(300)
+  ,
+
+  n(saw_notes)
+  .scale(saw_scale)
+  .s("sawtooth")
+  .gain(0.3)
+  .room(0.8)
+);
+
+
+// Speech 
+
+const speech_clip = "< .5 .5 .5  1>";
+const speech_sound = "<speech>";
+
+const speech = stack(
+  s(speech_sound)
+  .clip(speech_clip)
+  .room(1.7)
+  .lpf(2000)
+);
+
+
+// Effects
+
+const gun = "<gm_gunshot>";
+const palkia = "<palkia>";
+
+
+const effects = stack(
+  s(gun).gain(0).sometimesBy(0.2, x=>x.gain(2)),
+  s(palkia).velocity(0.2).slow(4).begin(0.5)
+);
+
+
+stack(
+// chords2,
+//   drums,
+//   effects,
+//   base,
+
+  // speech
+).cpm(150/4);
+
+
+
